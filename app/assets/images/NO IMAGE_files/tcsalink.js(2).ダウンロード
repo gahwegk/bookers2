@@ -1,0 +1,58 @@
+
+
+{
+	var TcsPair=location.search.substring(1).split('&');
+	var TcsAccessKey = "";
+
+	for(var i=0;TcsPair[i];i++) {
+
+		var kv = TcsPair[i].split('=');
+		if(kv[0] == 'Tcsack'){
+			TcsAccessKey = kv[1];
+			break;
+		}
+	}
+
+
+	if(TcsAccessKey != ''){
+
+		try{
+			var TcsStrage = localStorage;
+			TcsStrage.setItem('net.tcsAsp.ack',TcsAccessKey);
+		}
+		catch(e){
+			null;
+		}
+
+		var domainMoto = document.domain;
+		var domainSub = domainMoto.substring(domainMoto.indexOf('.'));
+
+
+		var date1 = new Date();
+		var date2 = new Date();
+		var kigen = 60;
+		date1.setTime(date1.getTime() + kigen*24*60*60*1000);
+		date2 = date1.toGMTString();
+
+		try{
+			var protocol = location.protocol;
+
+			if(protocol == 'https:'){
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainMoto+';path=/;expires='+ date2 + ';secure; samesite=none;';
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainSub+';path=/;expires='+ date2 + ';secure; samesite=none';
+			}
+			else if(protocol == 'http:'){
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainMoto+';path=/;expires='+ date2 + '; samesite=lax;';
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainSub+';path=/;expires='+ date2 + '; samesite=lax';
+			}
+			else{
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainMoto+';path=/;expires='+ date2 + ';secure; samesite=none;';
+				document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainSub+';path=/;expires='+ date2 + ';secure; samesite=none';
+			}
+		}
+		catch(e){
+			document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainMoto+';path=/;expires='+ date2 + ';secure; samesite=none;';
+			document.cookie = 'net.tcsAsp.ack='+TcsAccessKey+';domain='+domainSub+';path=/;expires='+ date2 + ';secure; samesite=none';
+		}
+	}
+}
