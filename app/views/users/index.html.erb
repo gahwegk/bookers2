@@ -1,5 +1,7 @@
 <main>
-  <div class='container px-5 px-sm-0'>
+  <p id="notice"><%= flash[:notice] %></p>
+  <div class='container px-5 px-sm-0', user: @user>
+
   <%= render 'layouts/userinfo'%>
 
 
@@ -17,9 +19,10 @@
           <tbody>
             
             
-            <tr>
-              <%= @users.each do |user| %>
-              <td><%= attachment_image_tag user, :profile_image %></td>
+            
+              <% @users.each do |user| %>
+              <tr>
+              <td><%= attachment_image_tag @user, :profile_image, :fill, 70, 70, format: 'jpeg', fallback: "default-image.jpg" %></td>
               <td><%= user.name %></td>
               <td><%= link_to "Show", user_path(current_user.id) %></td>
               <% end %>
@@ -30,6 +33,8 @@
             
           </tbody>
         </table>
+      </div>
+      </div>
       </div>
   
   </main>    

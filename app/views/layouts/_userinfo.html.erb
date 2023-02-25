@@ -1,13 +1,11 @@
-<main>
-  <p id="notice"><%= flash[:notice] %></p>
-  <div class='container px-5 px-sm-0'>
+
     <div class='row'>
       <div class='col-md-3'>
         <h2>User info</h2>
         <table class='table'>
           
           <tr>
-          <%= attachment_image_tag @user.profile_image, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "default-image.jpg" %>
+          <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "default-image.jpg" %>
           </tr>
           <tr>
             <th>name</th>
@@ -33,7 +31,7 @@
           </div>
           <div class="form-group">
             <label for="book_body">Opinion</label>
-            <textarea class="form-control" name="book[body]" id="book_body"></textarea>
+            <textarea class="form-control" name="book[opinion]" id="book_body"></textarea>
           </div>
           <div class="form-group">
             <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book" />
@@ -44,8 +42,4 @@
       
      
       
-      
-      
-    </div>
-  </div>
-</main>
+  
